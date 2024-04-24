@@ -24,28 +24,34 @@ async function fetchAPI(url){
     heroContainer.innerHTML = "";
     const response = await fetch(url);
     const jsonData = await response.json();
-    // console.log(jsonData.data["results"])
-    jsonData.data["results"].forEach(element => {
-        let heroCard = document.createElement("card");
-        let imageURL = element.thumbnail.path+"."+element.thumbnail.extension;
-        // console.log(imageURL);
-        heroCard.innerHTML =`
-        <div class="hero-card" id="${element.id}">
-            <div class="hero-image-container">
-                <img src="${imageURL}" class="hero-pic">
-                <button>
-                    <i class="fa-regular fa-heart"></i>
-                    <i class="fa-solid fa-heart" style="display: none;"></i>
-                </button>
+
+    if(jsonData.data["results"].length!==0){
+        jsonData.data["results"].forEach(element => {
+            let heroCard = document.createElement("card");
+            let imageURL = element.thumbnail.path+"."+element.thumbnail.extension;
+            // console.log(imageURL);
+            heroCard.innerHTML =`
+            <div class="hero-card" id="${element.id}">
+                <div class="hero-image-container">
+                    <img src="${imageURL}" class="hero-pic">
+                    <button>
+                        <i class="fa-regular fa-heart"></i>
+                        <i class="fa-solid fa-heart" style="display: none;"></i>
+                    </button>
+                </div>
+                <p class="hero-name">${element.name}</p>
             </div>
-            <p class="hero-name">${element.name}</p>
-        </div>
-        `;
-        if(element.thumbnail.path !== "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available"){
-            heroContainer.appendChild(heroCard);
-            // console.log("added")
-        }
-    });
+            `;
+            if(element.thumbnail.path !== "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available"){
+                heroContainer.appendChild(heroCard);
+                // console.log("added")
+            }
+        });
+    }else{
+        alert("No Heroes Found")
+    }
+    // console.log(jsonData.data["results"])
+    
 }
 
 
