@@ -67,7 +67,7 @@ function search(){
         fetchAPI(searchURL);
         console.log("search")
     }else{
-        alert("Empty Search Box.\n Please Enter a Hero Name")
+        alert("Empty Search Box.\nPlease Enter a Hero Name")
     }
     
 }
