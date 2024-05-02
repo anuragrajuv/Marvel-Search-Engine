@@ -58,8 +58,6 @@ async function fetchAPI(url){
 heroContainer.addEventListener('click', function(event) {
     // Access the clicked target
     const clickedElement = event.target;
-    // console.log(clickedElement);
-
     // Check if the clicked element is a hero card
     if (clickedElement.classList.contains('hero-card')) {
         // Access the hero ID from data attribute

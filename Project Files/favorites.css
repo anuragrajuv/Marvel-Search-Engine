@@ -59,7 +59,7 @@ img{
     height: auto;
 }
 
-.remove-from-favs button{
+.remove-from-favs{
     outline: none;
     border: none;
     border-radius: 10px;
@@ -69,7 +69,7 @@ img{
     height: 30px;
 }
 
-.remove-from-favs button:hover{
+.remove-from-favs :active{
     transform: translate(2px,5px);
     box-shadow: 0px 0px rgb(107, 14, 14);
 }

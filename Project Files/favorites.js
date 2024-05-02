@@ -15,6 +15,7 @@ function createAuthenticator(){
     return authenticationKey;
 }
 
+// Function To Fetch Favorite Heroes from API
 async function fetchAPI(url){
     favoritesContainer.innerHTML = "";
     const response = await fetch(url);
@@ -30,8 +31,8 @@ async function fetchAPI(url){
                 <div class="description-container">
                     <h2>${element.name}</h2>
                     <p>${element.description}</p>
-                    <div class="remove-from-favs">
-                        <button data-favorite-hero-id="${element.id}">Remove From Favorites</button>
+                    <div>
+                        <button class="remove-from-favs" data-favorite-hero-id="${element.id}">Remove From Favorites</button>
                     </div>
                 </div>
             </div>`;
@@ -40,7 +41,9 @@ async function fetchAPI(url){
     }else{
         alert("You Have Not Added any Heroes to Your Favorites List")
     }    
-}
+};
+
+
 
 // function to create a new authenticator every time the fetchAPI function is called
 async function fetchData() {
@@ -49,6 +52,7 @@ async function fetchData() {
 }
 
 
+// display heroes from local storage
 function displayFavoriteHeroes(){
     let favoriteHeroesArray = localStorage.getItem("favorite-heroes").split(",");
     console.log(favoriteHeroesArray);
@@ -56,8 +60,34 @@ function displayFavoriteHeroes(){
         let favID = element;
         let favUrl = baseUrl+"/"+favID+createAuthenticator();
         fetchAPI(favUrl);
-        console.log(favUrl)
-    })
+    });
 }
 
 displayFavoriteHeroes();
+
+
+
+function removeFavorites(event){
+    const clickedElement = event.target;
+    // console.log(clickedElement);
+    let favoriteHeroesArray = localStorage.getItem("favorite-heroes").split(",");
+    console.log(favoriteHeroesArray);
+    let favoriteHeroID = clickedElement.getAttribute("data-favorite-hero-id");
+    console.log("clicked heroID",favoriteHeroID);
+    const newFavs = favoriteHeroesArray.filter(element => element !== favoriteHeroID);
+    console.log(newFavs);
+    localStorage.setItem("favorite-heroes",newFavs);
+    // console.log("localStorage:",localStorage.getItem("favorite-heroes"));
+    displayFavoriteHeroes();
+    };
+
+
+window.addEventListener("click",(event)=>{
+    // console.log("click window")
+    const clicked = event.target;
+    if(clicked.classList.contains('remove-from-favs')){
+        // console.log("clicked");
+        removeFavorites(event);
+    }
+    
+})
