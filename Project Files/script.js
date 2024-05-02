@@ -13,6 +13,12 @@ const searchBox = document.querySelector("#search-box")
 
 
 async function fetchAPI(url){
+    
+    // var timestamp = Date.now();
+    // var hash = md5(timestamp+privateKey+publicKey);
+    // var authenticationKey = `apikey=${publicKey}&hash=${hash}&ts=${timestamp}`
+    // var url = baseUrl+authenticationKey;
+
     heroContainer.innerHTML = "";
     const response = await fetch(url);
     const jsonData = await response.json();
@@ -42,6 +48,8 @@ async function fetchAPI(url){
     }else{
         alert("No Heroes Found")
     }    
+    // console.log("blueeeeeeeeee");
+
 }
 
 
@@ -61,10 +69,10 @@ heroContainer.addEventListener('click', function(event) {
         console.log('Clicked hero ID:', heroId);
         
         // Redirect to the hero's page passing the heroId as a parameter
-        // window.location.href = `/hero/${heroId}`;
-        // window.location.href = `hero.html/${heroId}`;
-        window.open("hero.html", "_blank");
-        displayHeroInHeroPage(heroId);
+        localStorage.setItem("heroId",heroId);
+        console.log(localStorage.getItem("heroId"))
+        window.open(`hero page.html?id=${heroId}`, "_blank");
+        
     }else if(clickedElement.classList.contains('add-to-favorites')){
         addToFavorites(event);
     }
@@ -109,7 +117,7 @@ searchBox.addEventListener("keydown",(e)=>{
 
 
 // Function to create Authenticator(to create a new url with a new timestamp for every request)
-function createAuthenticator(baseUrl){
+function createAuthenticator(){
     var timestamp = Date.now();
     var hash = md5(timestamp+privateKey+publicKey);
     var authenticationKey = `apikey=${publicKey}&hash=${hash}&ts=${timestamp}`

@@ -22,9 +22,10 @@ body{
 
 #favorites-container{
     margin-top: 20px;
+    padding: 10px;
     display: flex;
     width: 90vw;
-    border-radius: 20px;
+    /* border-radius: 30px; */
     margin: auto;
     justify-content: center;
     flex-direction:row;
@@ -39,9 +40,8 @@ body{
     width: 80vw;
     padding: 10px;
     background-color: black;
-    border-radius: 20px;
+    border-radius: 30px;
     color: white;
-    
 }
 
 img{
@@ -53,17 +53,24 @@ img{
 }
 
 .description-container{
-    justify-content: flex-start;
-    display: grid;
-    flex-direction: column;
-    width: 80%;
+    padding: 10px;
+    align-items: flex-start;
+    width: 100%;
     height: auto;
 }
 
-.remove-from-favs{
-    width: 100%;
-    align-self: end;
-    justify-self: end;
+.remove-from-favs button{
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    background-color: darkred;
+    color: white;
+    box-shadow: 2px 5px rgb(107, 14, 14);
+    height: 30px;
 }
 
-/* .remove-from-favs{} */
+.remove-from-favs button:hover{
+    transform: translate(2px,5px);
+    box-shadow: 0px 0px rgb(107, 14, 14);
+}
+

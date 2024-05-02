@@ -1,0 +1,31 @@
+body{
+    max-width: 100vw;
+    min-height: 100vh;
+    background: #00d2ff;  /* fallback for old browsers*/
+    background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #3a7bd5, #00d2ff);
+    display:flex;
+}
+
+
+#hero-page-container{
+    justify-self: center;
+    width: 90%;
+    height: 80vh;
+    margin: auto;
+    border: 2px solid white;
+    display: flex;
+    flex-direction: row;
+}
+
+#hero-page-container img{
+    width: 35vw;
+    height: 100%;
+    object-fit: cover;
+    border: 2px solid white;
+}
+
+#bio-container{
+    width: auto;
+    
+}

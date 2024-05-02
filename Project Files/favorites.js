@@ -25,7 +25,6 @@ async function fetchAPI(url){
             var heroCard = document.createElement("card");
             var imageURL = element.thumbnail.path+"."+element.thumbnail.extension;
             heroCard.innerHTML =`
-            <ul>
             <div class="favorite-hero-card" data-hero-id="${element.id}">
                 <img src=${imageURL}>
                 <div class="description-container">
