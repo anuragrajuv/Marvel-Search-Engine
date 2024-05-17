@@ -23,12 +23,11 @@ body{
     background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 #header-container{
+    display: inline-block;
     width: 100%;
     text-align: center;
     background-color: var(--color1);
     /* background-image: radial-gradient(#e12835 20%, #be2633 50%, rgba(0, 0, 0, .5) 120%); */
-    
-
 }   
 #header{
     height: 8vw;
@@ -88,17 +87,19 @@ h1{
     background-color: var(--color1);
     height: 40px;
     border-radius: 0 20px 20px 0;
+    font-weight: bold;
+
 }
 
 #go-to-favorites{
     margin: 10px;
     /* width: 100px; */
-    height: 40px;
+    height: 50px;
     outline: none;
     /* border: none; */
     background-color: var(--color1);
     border: 5px solid white;
-    border-radius: 20px;
+    border-radius: 30px;
     color: white;
     padding-left: 10px;
     font-weight: bold;
@@ -139,7 +140,7 @@ h1{
     width: 20vw;
     height: 30vw;
     margin-bottom: 20px;
-    /* border-radius: 10px; */
+    border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     color: white;
     transition: ease-in-out 0.5s;
@@ -165,6 +166,7 @@ h1{
 .hero-image-container img{
     height: 100%;
     width: 100%;
+    border-radius: 5px 5px 0 0;
     object-fit:cover;
     pointer-events:none;
     /* border-radius: 10px 10px 0px 0px; */
