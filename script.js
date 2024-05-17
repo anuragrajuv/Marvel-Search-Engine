@@ -9,47 +9,51 @@ const baseUrl = "https://gateway.marvel.com/v1/public/characters?limit=47&"
 
 const heroContainer = document.querySelector("#hero-container");
 const searchButton = document.querySelector("#search-button");
-const searchBox = document.querySelector("#search-box")
-
+const searchBox = document.querySelector("#search-box");
 
 
 async function fetchAPI(url){
+    const loadingSpinner = document.getElementById("loading");
+    loadingSpinner.removeAttribute("hidden");
 
-    heroContainer.innerHTML = "";
-    const response = await fetch(url);
-    const jsonData = await response.json();
+    try{
+        const response = await fetch(url);
+        const jsonData = await response.json();
 
-    var resultsArr = jsonData.data["results"];
-    shuffle(resultsArr);
+        var resultsArr = jsonData.data["results"];
+        shuffle(resultsArr);
 
-    if(resultsArr.length!==0){
-        resultsArr.forEach(element => {
-            var heroCard = document.createElement("card");
-            var imageURL = element.thumbnail.path+"."+element.thumbnail.extension;
-            // console.log(imageURL);
-            heroCard.innerHTML =`
-            <div class="hero-card" data-hero-id="${element.id}">
-                <div class="hero-image-container">
-                    <img src="${imageURL}" class="hero-pic">
-                    <button class="add-to-favorites" data-favorite-hero-id="${element.id}">
-                        <i class="fa-regular fa-heart"></i>
-                        <i class="fa-solid fa-heart" style="display: none;"></i>
-                    </button>
+        if(resultsArr.length!==0){
+            resultsArr.forEach(element => {
+                var heroCard = document.createElement("card");
+                var imageURL = element.thumbnail.path+"."+element.thumbnail.extension;
+                // console.log(imageURL);
+                heroCard.innerHTML =`
+                <div class="hero-card" data-hero-id="${element.id}">
+                    <div class="hero-image-container">
+                        <img src="${imageURL}" class="hero-pic">
+                        <button class="add-to-favorites" data-favorite-hero-id="${element.id}">
+                            <i class="fa-regular fa-heart"></i>
+                            <i class="fa-solid fa-heart" style="display: none;"></i>
+                        </button>
+                    </div>
+                    <p class="hero-name">${element.name}</p>
                 </div>
-                <p class="hero-name">${element.name}</p>
-            </div>
-            `;
-            if(element.thumbnail.path !== "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available"){
-                heroContainer.appendChild(heroCard);
-                // console.log("added")
-            }
-        });
-    }else{
-        alert("No Heroes Found")
-    }    
-    // console.log("blueeeeeeeeee");
-
-}
+                `;
+                if(element.thumbnail.path !== "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available"){
+                    heroContainer.appendChild(heroCard);
+                    // console.log("added")
+                }
+            });
+        }else{
+            alert("No Heroes Found")
+        }    
+    } catch {
+        console.error("Error Fetching Data:",error)
+    } finally{
+        loadingSpinner.setAttribute("hidden", "");
+    }
+};
 
 
 
@@ -93,6 +97,7 @@ function addToFavorites(event){
 function search(){
     let searchInput = searchBox.value; 
     if(searchInput.trim()!==""){
+        heroContainer.innerHTML = `<div id="loading" class="loading-spinner" hidden></div>`;
         let extra = `&nameStartsWith=${searchInput}`;
         let searchURL = createAuthenticator()+extra;
         fetchAPI(searchURL);

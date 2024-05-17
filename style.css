@@ -206,6 +206,22 @@ h1{
     pointer-events: none;
 }
 
+.loading-spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid var(--color1);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    top: 50%;
+    margin: auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 
 /* Media Queries for Phone Screens */
 @media (max-width: 768px) {
