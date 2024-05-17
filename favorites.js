@@ -52,7 +52,7 @@ async function fetchData() {
 }
 
 const emptyList = `
-    <div style='color:white;text-align:center;border:2px solid white;border-radius:10px;font-size:3rem;'>
+    <div id="none">
         <p>NOTHING TO DISPLAY!!!.</p>
         <p>Add Heroes to Favorites List to View Them Here</p>
         <a href="index.html">Go Back</a>

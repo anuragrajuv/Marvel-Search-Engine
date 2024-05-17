@@ -96,3 +96,64 @@ a:link, a:visited {
     border: 5px solid white;
     margin-bottom: 10px;
   }
+#none{
+    color:white;
+    text-align:center;
+    border:2px solid white;
+    border-radius:10px;
+    font-size:3rem;
+}
+  
+
+
+/* Media Queries for Mobile Screens */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.5rem;
+        margin-top: 10px;
+    }
+
+    #favorites-container {
+        padding: 5px;
+    }
+
+    .favorite-hero-card {
+        flex-direction: column;
+        width: 90vw;
+        margin: 5px;
+        padding: 5px;
+        border-radius: 13px;
+    }
+
+    img {
+        width: 100%;
+        margin: auto;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .description-container {
+        width: 100%;
+        padding: 5px;
+    }
+
+    .remove-from-favs {
+        width: 100%;
+        margin-bottom: 5px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    a:link,
+    a:visited {
+        font-size: large;
+        width: 80%;
+        padding: 10px 20px;
+    }
+
+    #none{
+        margin-top: 40vh;
+        transform: translatey(-50%);
+        font-size:1.5rem;
+
+    }
+}

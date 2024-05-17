@@ -1,8 +1,9 @@
+localStorage.getItem("favorite-heroes");
 var favoriteHeroesArray = [];
 
 const publicKey = "29f38fa9a046140d30f7b08171dd1ef9";
 const privateKey = "a9cc3279556e7415a3afd4ad3e2d453c0dd300ae";
-const baseUrl = "https://gateway.marvel.com/v1/public/characters?limit=99&"
+const baseUrl = "https://gateway.marvel.com/v1/public/characters?limit=47&"
 
 // console.log(authenticationKey);
 

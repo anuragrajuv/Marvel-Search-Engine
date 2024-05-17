@@ -33,7 +33,6 @@ body{
     /* object-fit: cover; */
     border-right:2px solid white;
     border-radius: 19px 0 0 19px;
-
 }
 
 #bio-container{
@@ -111,5 +110,61 @@ content: "<-";
 
 #urls a:link,#urls a:visited {
     color: white;
+    
+}
+
+/* Media Queries for Mobile Screens */
+@media (max-width: 768px) {
+    #hero-page-container{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
+        margin: auto;
+        height: auto;
+        border:none;
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+
+    #hero-page-container img{
+        width: 50vw;
+        height: 50vw; 
+        object-fit: cover;
+        border: 2px solid white;
+        border-radius:50%;
+    }
+
+    #hero-name {
+        text-align: center;
+        width: auto;
+        font-size: 1.5rem;
+        /* margin: auto; */
+    }
+
+    #hero-page-description {
+        font-size: 0.9rem;
+        text-align: justify;
+    }
+    .content{
+        flex-wrap: wrap;
+    }
+    .content div {
+        width: 40%;
+        font-size: small;
+    }
+
+    #back-button a:link,#back-button a:visited {
+        position: fixed;
+        font-size: 1.2rem;
+        background-color:var(--color1);
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        width:150px;
+        margin-left: -20px;
+      }
+
     
 }

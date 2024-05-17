@@ -185,26 +185,3 @@ async function displayLinks(){
         linksElement.innerHTML = "No links Found"
     }
 };
-
-
-// jsonData.data["comics"]
-// element.items.resourceURI
-// element.items.name
-
-
-// jsonData.data["series"]
-// element.items.resourceURI
-// element.items.name
-
-
-// jsonData.data["stories"]
-// element.items.resourceURI
-// element.items.name
-
-// jsonData.data["events"]
-// element.items.resourceURI
-// element.items.name
-
-// jsonData.data["urls"]
-// element.type
-// element.url
