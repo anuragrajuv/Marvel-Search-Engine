@@ -51,43 +51,59 @@ async function fetchData() {
     await fetchAPI(url);
 }
 
+const emptyList = `
+    <div style='color:white;text-align:center;border:2px solid white;border-radius:10px;font-size:3rem;'>
+        <p>NOTHING TO DISPLAY!!!.</p>
+        <p>Add Heroes to Favorites List to View Them Here</p>
+        <a href="index.html">Go Back</a>
+    </div>`;
+
+console.log(emptyList);
 
 // display heroes from local storage
 function displayFavoriteHeroes(){
-    let favoriteHeroesArray = localStorage.getItem("favorite-heroes").split(",");
-    console.log(favoriteHeroesArray);
-    favoriteHeroesArray.forEach(element=>{
+    if(localStorage.getItem("favorite-heroes")===""){
+        // alert("Favorites Empty");
+        favoritesContainer.innerHTML = emptyList;
+    }else{
+        let favoriteHeroesArray = localStorage.getItem("favorite-heroes").split(",");
+        console.log(favoriteHeroesArray);
+        favoriteHeroesArray.forEach(element=>{
         let favID = element;
         let favUrl = baseUrl+"/"+favID+createAuthenticator();
-        fetchAPI(favUrl);
-    });
+        fetchAPI(favUrl);});
+    }
 }
 
 displayFavoriteHeroes();
 
 
-
+// Function To Remove Hero from Favorite and from the user interface
 function removeFavorites(event){
     const clickedElement = event.target;
     // console.log(clickedElement);
     let favoriteHeroesArray = localStorage.getItem("favorite-heroes").split(",");
-    console.log(favoriteHeroesArray);
+    console.log(localStorage.getItem("favorite-heroes"));
     let favoriteHeroID = clickedElement.getAttribute("data-favorite-hero-id");
-    console.log("clicked heroID",favoriteHeroID);
+    // console.log("clicked heroID",favoriteHeroID);
     const newFavs = favoriteHeroesArray.filter(element => element !== favoriteHeroID);
-    console.log(newFavs);
+    // console.log(newFavs);
     localStorage.setItem("favorite-heroes",newFavs);
     // console.log("localStorage:",localStorage.getItem("favorite-heroes"));
-    displayFavoriteHeroes();
-    };
+    let favCard = clickedElement.parentElement.parentElement.parentElement.parentElement;
+    // console.log(favCard);
+    favoritesContainer.removeChild(favCard);
+    console.log("after click",localStorage.getItem("favorite-heroes"));
+    if(localStorage.getItem("favorite-heroes")===""){
+        favoritesContainer.innerHTML = emptyList;
+    }};
 
 
+
+// Adding Click Event Listener to Remove favorite Button
 window.addEventListener("click",(event)=>{
-    // console.log("click window")
     const clicked = event.target;
     if(clicked.classList.contains('remove-from-favs')){
-        // console.log("clicked");
         removeFavorites(event);
     }
-    
 })

@@ -5,27 +5,111 @@ body{
     background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff); /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #3a7bd5, #00d2ff);
     display:flex;
+    flex-direction: column;
+    /* color: white; */
 }
 
 
 #hero-page-container{
     justify-self: center;
     width: 90%;
-    height: 80vh;
+    /* min-height: 80vh; */
     margin: auto;
+    margin-top: 10px;
     border: 2px solid white;
     display: flex;
     flex-direction: row;
+    color: white;
+    border-radius: 20px;
+}
+#hero-page-container div{
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 #hero-page-container img{
-    width: 35vw;
-    height: 100%;
-    object-fit: cover;
-    border: 2px solid white;
+    width: 25vw;
+    /* height: 100%;  */
+    /* object-fit: cover; */
+    border-right:2px solid white;
+    border-radius: 19px 0 0 19px;
+
 }
 
 #bio-container{
     width: auto;
+    height: auto;
+}
+
+#hero-name{
+    font-size: 3rem;
+    font-weight: bolder;
+    text-transform: uppercase;
+}
+
+#hero-page-description{
+    font-size: 1.4rem;
+    text-align: justify;
+    /* height: auto; */
+}
+
+.extra{
+    color: white;
+    border: 2px solid white;
+    min-height: 30vh;
+    margin: auto;
+    margin-top: 10px;
+    width: 90%;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+#back-button a:link,#back-button a:visited {
+    font-size: x-large;
+    background-color:var(--color1);
+    color: white;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    /* border-radius: 40px; */
+    /* border: 2px solid white; */
+    margin-bottom: 10px;
+    width:200px;
+  }
+
+#back-button a::before{
+content: "<-";
+}
+
+.content{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:flex-start;
+    text-transform: capitalize;
+    
+}
+.content div{
+    width: 15%;
+    height: auto;
+    margin: 9px;
+    border-radius: 10px;
+    font-weight: bold;
+    /* color: black; */
+}
+
+.content div img{
+    width: 100%;
+    border-radius: 7.5px;
+}
+
+.list{
+    display: block;
+    font-weight: bold;
+}
+
+#urls a:link,#urls a:visited {
+    color: white;
     
 }
