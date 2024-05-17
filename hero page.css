@@ -55,7 +55,7 @@ body{
 .extra{
     color: white;
     border: 2px solid white;
-    min-height: 30vh;
+    /* min-height: 30vh; */
     margin: auto;
     margin-top: 10px;
     width: 90%;

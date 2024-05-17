@@ -90,7 +90,7 @@ async function displayComics(){
             comicsElement.appendChild(card);
         });
     }else{
-        comicsElement.innerHTML = "No Comics Found"
+        comicsElement.parentElement.style.display = "none";
     }
 };
 
@@ -113,7 +113,8 @@ async function displaySeries(){
             seriesElement.appendChild(card);
         });
     }else{
-        seriesElement.innerHTML = "No Comics Found";
+        seriesElement.parentElement.style.display = "none";
+
     }
 };
 
@@ -136,7 +137,7 @@ async function displayEvents(){
             eventsElement.appendChild(card);
         });
     }else{
-        eventsElement.innerHTML = "No events Found"
+        eventsElement.parentElement.style.display = "none";
     }
 };
 
@@ -158,7 +159,7 @@ async function displayStories(){
             storiesElement.appendChild(card);
         });
     }else{
-        storiesElement.innerHTML = "No Stories Found"
+        storiesElement.parentElement.style.display = "none";
     }
 };
 
@@ -182,6 +183,6 @@ async function displayLinks(){
             })
         });
     }else{
-        linksElement.innerHTML = "No links Found"
+        linksElement.parentElement.style.display = "none";
     }
 };
