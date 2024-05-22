@@ -1,6 +1,7 @@
-
-const publicKey = "29f38fa9a046140d30f7b08171dd1ef9";
-const privateKey = "a9cc3279556e7415a3afd4ad3e2d453c0dd300ae";
+// const publicKey = "29f38fa9a046140d30f7b08171dd1ef9";
+// const privateKey = "a9cc3279556e7415a3afd4ad3e2d453c0dd300ae";
+const publicKey = "e7ce26847d426b68eb35e5fb5970816a";
+const privateKey = "823b7ea7307d50500e57bfba3846842b6fdf667e";
 const baseUrl = "https://gateway.marvel.com/v1/public/characters"
 
 const favoritesContainer = document.getElementById("favorites-container");
@@ -58,8 +59,6 @@ const emptyList = `
         <a href="index.html">Go Back</a>
     </div>`;
 
-console.log(emptyList);
-
 // display heroes from local storage
 function displayFavoriteHeroes(){
     if(localStorage.getItem("favorite-heroes")===""){
@@ -67,8 +66,9 @@ function displayFavoriteHeroes(){
         favoritesContainer.innerHTML = emptyList;
     }else{
         let favoriteHeroesArray = localStorage.getItem("favorite-heroes").split(",");
-        console.log(favoriteHeroesArray);
-        favoriteHeroesArray.forEach(element=>{
+        let finalArr = removeDuplicates(favoriteHeroesArray);
+        console.log(finalArr);
+        finalArr.forEach(element=>{
         let favID = element;
         let favUrl = baseUrl+"/"+favID+createAuthenticator();
         fetchAPI(favUrl);});
@@ -107,3 +107,8 @@ window.addEventListener("click",(event)=>{
         removeFavorites(event);
     }
 })
+
+
+function removeDuplicates(arr) {
+    return arr.filter((item,index) => arr.indexOf(item) === index);
+}

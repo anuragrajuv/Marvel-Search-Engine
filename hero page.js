@@ -1,5 +1,7 @@
-const publicKey = "29f38fa9a046140d30f7b08171dd1ef9";
-const privateKey = "a9cc3279556e7415a3afd4ad3e2d453c0dd300ae";
+// const publicKey = "29f38fa9a046140d30f7b08171dd1ef9";
+// const privateKey = "a9cc3279556e7415a3afd4ad3e2d453c0dd300ae";
+const publicKey = "e7ce26847d426b68eb35e5fb5970816a";
+const privateKey = "823b7ea7307d50500e57bfba3846842b6fdf667e";
 const baseUrl = "https://gateway.marvel.com/v1/public/characters?"
 
 const heroPageContainer = document.getElementById("hero-page-container")
@@ -50,6 +52,7 @@ async function displayHeroInHeroPage(heroId){
             jsonData.data["results"].forEach(element => {
                 document.title = element.name;
                 let imageURL = element.thumbnail.path+"."+element.thumbnail.extension;
+                console.log(imageURL);
                 heroPageContainer.innerHTML =`
                 <img src="${imageURL}" alt="" id="hero-page-image">
                 <div id="bio-container">

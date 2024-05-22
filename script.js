@@ -1,15 +1,19 @@
 localStorage.getItem("favorite-heroes");
-var favoriteHeroesArray = [];
 
-const publicKey = "29f38fa9a046140d30f7b08171dd1ef9";
-const privateKey = "a9cc3279556e7415a3afd4ad3e2d453c0dd300ae";
-const baseUrl = "https://gateway.marvel.com/v1/public/characters?limit=47&"
+// const publicKey = "29f38fa9a046140d30f7b08171dd1ef9";
+// const privateKey = "a9cc3279556e7415a3afd4ad3e2d453c0dd300ae";
+const publicKey = "e7ce26847d426b68eb35e5fb5970816a";
+const privateKey = "823b7ea7307d50500e57bfba3846842b6fdf667e";
+const baseUrl = "https://gateway.marvel.com/v1/public/characters?limit=99&"
 
 // console.log(authenticationKey);
 
 const heroContainer = document.querySelector("#hero-container");
 const searchButton = document.querySelector("#search-button");
 const searchBox = document.querySelector("#search-box");
+
+let heroNames = [];
+const heroNameDropdown = document.getElementById('names-dropdown');
 
 
 async function fetchAPI(url){
@@ -81,15 +85,21 @@ heroContainer.addEventListener('click', function(event) {
 
 // Function to add Heroes to Favorites List
 function addToFavorites(event){
+    var exsitingFavorites = localStorage.getItem("favorite-heroes");
+    console.log("exsitingFavorites",exsitingFavorites);
     const clickedElement = event.target;
-    // console.log(clickedElement);
+    console.log(clickedElement);
     clickedElement.innerHTML = "<i class='fa-solid fa-heart'></i>";
     let favoriteHeroID = clickedElement.getAttribute("data-favorite-hero-id");
-    // console.log(favoriteHeroID);
-    favoriteHeroesArray.push(favoriteHeroID);
-    console.log(favoriteHeroesArray);
-    localStorage.setItem("favorite-heroes",favoriteHeroesArray);
-    console.log("localStorage:",localStorage.getItem("favorite-heroes"));
+    if(exsitingFavorites===""){
+        // console.log(favoriteHeroesArray);
+        localStorage.setItem("favorite-heroes",favoriteHeroID);
+        console.log("localStorage:",localStorage.getItem("favorite-heroes"));
+    }else{
+        final = exsitingFavorites+","+(favoriteHeroID);
+        localStorage.setItem("favorite-heroes",final);
+    }
+    
 };
 
 
@@ -101,7 +111,7 @@ function search(){
         let extra = `&nameStartsWith=${searchInput}`;
         let searchURL = createAuthenticator()+extra;
         fetchAPI(searchURL);
-        console.log("search")
+        searchBox.value = "";
     }else{
         alert("Empty Search Box.\nPlease Enter a Hero Name")
     }
@@ -120,10 +130,17 @@ function shuffle(a) {
   
 
 // adding event Listener to the search button and search box
-searchButton.addEventListener("click",search);
+searchButton.addEventListener("click",()=>{
+    search();
+    heroNameDropdown.innerHTML = "";
+    searchBox.style.borderRadius = "20px 0 0 20px";
+});
+
 searchBox.addEventListener("keydown",(e)=>{
     if(e.key === "Enter"){
         search();
+        heroNameDropdown.innerHTML = "";
+        searchBox.style.borderRadius = "20px 0 0 20px";
     }
 });
 
@@ -149,3 +166,42 @@ fetchData();
 
 
 
+
+function fetchHeroNames(){
+    console.log("fetchHeroName ran")
+    let searchInput = searchBox.value;
+    let extra = `&nameStartsWith=${searchInput}`;
+    let dropdownURL = createAuthenticator()+extra;
+    fetch(dropdownURL)
+    .then((response)=>response.json())
+    .then((data)=>{
+        heroNames = data.data.results.map(x => x.name);
+        searchBox.style.borderRadius = "20px 0 0 0";
+        loadData(heroNames,heroNameDropdown);
+    })
+}
+
+function loadData(data,element){
+    if(data){
+        element.innerHTML = "";
+        let innerElement = "";
+        data.forEach((item)=>{
+            innerElement +=`
+            <li>${item}</li>
+            `;
+        });
+
+        element.innerHTML = innerElement;
+    }
+}
+
+
+searchBox.addEventListener("input",fetchHeroNames);
+
+
+heroNameDropdown.addEventListener("click",(e)=>{
+    searchBox.value = e.target.innerHTML;
+    heroNameDropdown.innerHTML = "";
+    searchBox.style.borderRadius = "20px 0 0 20px";
+    search();
+});
