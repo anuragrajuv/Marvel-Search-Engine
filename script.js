@@ -121,7 +121,9 @@ function search() {
     if (searchInput.trim() !== "") {
         heroContainer.innerHTML = `<div id="loading" class="loading-spinner" hidden></div>`;
         let extra = `&nameStartsWith=${searchInput}`;
-        let searchURL = getAPIURL() + extra;
+        // let searchURL = getAPIURL() + extra;
+        let searchURL = createAuthenticator()+extra;
+
         fetchAPI(searchURL);
         searchBox.value = "";
     } else {
