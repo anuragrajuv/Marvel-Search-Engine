@@ -4,7 +4,7 @@ localStorage.getItem("favorite-heroes");
 // const privateKey = "a9cc3279556e7415a3afd4ad3e2d453c0dd300ae";
 const publicKey = "e7ce26847d426b68eb35e5fb5970816a";
 const privateKey = "823b7ea7307d50500e57bfba3846842b6fdf667e";
-const baseUrl = "https://gateway.marvel.com/v1/public/characters?limit=99&"
+const baseUrl = "https://gateway.marvel.com/v1/public/characters?"
 
 // console.log(authenticationKey);
 
@@ -17,6 +17,7 @@ const heroNameDropdown = document.getElementById('names-dropdown');
 
 
 async function fetchAPI(url){
+    console.log(url);
     const loadingSpinner = document.getElementById("loading");
     loadingSpinner.removeAttribute("hidden");
 
@@ -51,7 +52,7 @@ async function fetchAPI(url){
             });
         }else{
             alert("No Heroes Found")
-        }    
+        }
     } catch {
         console.error("Error Fetching Data:",error)
     } finally{
@@ -84,64 +85,49 @@ heroContainer.addEventListener('click', function(event) {
 });
 
 // Function to add Heroes to Favorites List
-function addToFavorites(event){
+function addToFavorites(event) {
     var exsitingFavorites = localStorage.getItem("favorite-heroes");
-    // console.log("exsitingFavorites",exsitingFavorites);
     const clickedElement = event.target;
-    // console.log(clickedElement);
-    if(!clickedElement.classList.contains("favorited")){
+    if (!clickedElement.classList.contains("favorited")) {
         clickedElement.classList.toggle("favorited");
         clickedElement.innerHTML = "<i class='fa-solid fa-heart'></i>";
         let favoriteHeroID = clickedElement.getAttribute("data-favorite-hero-id");
-        if(exsitingFavorites===""){
-            // console.log(favoriteHeroesArray);
-            localStorage.setItem("favorite-heroes",favoriteHeroID);
-            // console.log("localStorage:",localStorage.getItem("favorite-heroes"));
-        }else{
-            final = exsitingFavorites+","+(favoriteHeroID);
-            localStorage.setItem("favorite-heroes",final);
+        if (exsitingFavorites === "") {
+            localStorage.setItem("favorite-heroes", favoriteHeroID);
+        } else {
+            final = exsitingFavorites + "," + (favoriteHeroID);
+            localStorage.setItem("favorite-heroes", final);
         }
-        console.log("after click",localStorage.getItem("favorite-heroes"));
-    }else{
+        console.log("after click", localStorage.getItem("favorite-heroes"));
+    } else {
         clickedElement.classList.toggle("favorited");
         clickedElement.innerHTML = "<i class='fa-regular fa-heart'></i>";
         removeFavorites(event);
     }
-};
-
+}
 
 // Function To Remove Hero from Favorite and from the user interface
-function removeFavorites(event){
+function removeFavorites(event) {
     const clickedElement = event.target;
-    // console.log(clickedElement);
     let favoriteHeroesArray = localStorage.getItem("favorite-heroes").split(",");
-    // console.log(localStorage.getItem("favorite-heroes"));
     let favoriteHeroID = clickedElement.getAttribute("data-favorite-hero-id");
-    // console.log("clicked heroID",favoriteHeroID);
     const newFavs = favoriteHeroesArray.filter(element => element !== favoriteHeroID);
-    // console.log(newFavs);
-    localStorage.setItem("favorite-heroes",newFavs);
-    // console.log("localStorage:",localStorage.getItem("favorite-heroes"));
-    console.log("after click",localStorage.getItem("favorite-heroes"));
-   };
+    localStorage.setItem("favorite-heroes", newFavs);
+    console.log("after click", localStorage.getItem("favorite-heroes"));
+}
 
-
-// Search Function(URL generated and sent to fetchAPI Function )
-function search(){
-    let searchInput = searchBox.value; 
-    if(searchInput.trim()!==""){
+function search() {
+    let searchInput = searchBox.value;
+    if (searchInput.trim() !== "") {
         heroContainer.innerHTML = `<div id="loading" class="loading-spinner" hidden></div>`;
         let extra = `&nameStartsWith=${searchInput}`;
-        let searchURL = createAuthenticator()+extra;
+        let searchURL = getAPIURL() + extra;
         fetchAPI(searchURL);
         searchBox.value = "";
-    }else{
+    } else {
         alert("Empty Search Box.\nPlease Enter a Hero Name")
     }
-    
-};
-
-
+}
 
 function shuffle(a) {
     for (let i = a.length - 1; i > 0; i--) {
@@ -150,7 +136,6 @@ function shuffle(a) {
     }
     return a;
 }
-  
 
 // adding event Listener to the search button and search box
 searchButton.addEventListener("click",()=>{
